@@ -1,0 +1,73 @@
+@media screen and (min-width: 801px) {
+	html {
+		font-size: 150%;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	html {
+		font-size: 62.5%;
+	}
+}
+
+body {
+	text-align: center;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+/* section styles */
+
+section {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;	
+}
+
+section article {
+	margin: 0 1rem;
+}
+
+section article ul { /* hexagram */
+	width: 15rem;
+}
+
+section article ul li { /* hexagram line*/
+	margin: 1rem 0;
+}
+
+/* line css drawings */
+
+.yang {
+	width: 15rem;
+	height: 2rem;
+	background: #e7e42a;
+}
+
+.yin {
+	width: 7rem;
+	height: 2rem;
+	border-right: 9rem;
+	background:  #e7e42a;
+}
+
+.yin:after {
+	content: "";
+	display: block;
+	width: 0;
+	height: 2rem;
+	margin-left: 8rem;
+	padding-left: 7rem;
+	background:  #e7e42a;
+}
+
+.yin.old:after {
+	background: orange;
+}
+
+.old {
+	background: orange;
+}

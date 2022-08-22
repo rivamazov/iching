@@ -1,0 +1,10 @@
+{
+  "name": "iching",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.10"
+  }
+}
