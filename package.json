@@ -1,0 +1,10 @@
+{
+  "name": "iching",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npx browser-sync --server --files ./"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.27.10"
+  }
+}
