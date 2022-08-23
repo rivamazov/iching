@@ -1,6 +1,27 @@
 'use strict'
 
-function setLineCssClass(line) {
+const PROBABILITY_ARR = [6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9]
+const HEX_LOOKUP_ARR = 'hexArr.json'
+const Hexagram = []
+
+function randomIndexFromArr(arr) {
+  return arr[Math.floor(Math.random()*arr.length)]
+}
+
+function cast() {
+  Hexagram.push(randomIndexFromArr(PROBABILITY_ARR))
+  const lineNumber = Hexagram.length
+  const lineLi = document.getElementById('line' + lineNumber)
+  lineLi.setAttribute('class', `${getLineCssClass(Hexagram[lineNumber-1])}`)
+
+  if (lineNumber == 6) {
+    const castBtn = document.getElementById('castBtn')
+    castBtn.setAttribute('onClick', 'reset()')
+    castBtn.innerHTML = 'Reset'
+  }
+}
+
+function getLineCssClass(line) {
   switch(line) {
     case 6: return 'yin old'
     case 7: return 'yang'
@@ -9,38 +30,22 @@ function setLineCssClass(line) {
   }
 }
 
-async function populate() {
-  const requestUrl = 'hexArr.json'
-  const request = new Request(requestUrl)
-
-  const response = await fetch(request);
-  const hexagramsArr = await response.json()
-
-  populateHexagrams(hexagramsArr)
-}
-
-function populateHexagrams(arr) {
-  const section = document.querySelector('section')
-  const hexagrams = arr
-  for (const hexagram of hexagrams) {
-    const article = document.createElement('article')
-    const h2 = document.createElement('h2')
-    const linesList = document.createElement('ul')
-
-    h2.textContent = hexagram.number
-
-    const hexLinesStr = hexagram.lines
-    for (const i in hexLinesStr) {
-      const line = hexLinesStr[i]
-      const listItem = document.createElement('li')
-      listItem.setAttribute('class', `${setLineCssClass(parseInt(line))}`)
-      linesList.appendChild(listItem)
-    }
-    article.appendChild(h2)
-    article.appendChild(linesList)
-
-    section.appendChild(article)
+function reset() {
+  const lineLiList = document.querySelectorAll('[id^=line]')
+  for (const lineElement of lineLiList) {
+    lineElement.setAttribute('class', 'yin placeholder')
   }
+  Hexagram.length = 0
+  const castBtn = document.getElementById('castBtn')
+  castBtn.setAttribute('onClick', 'cast()')
+  castBtn.innerHTML = "Cast Line"
 }
 
-populate()
+async function getHexLookupArr() {
+  const request = new Request(HEX_LOOKUP_ARR)
+  const response = await fetch(request)
+  const hexagramsArr = await response.json()
+  return hexagramsArr
+}
+
+const hexArr = getHexLookupArr()

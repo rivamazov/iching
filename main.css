@@ -1,17 +1,25 @@
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 456px) {
 	html {
 		font-size: 150%;
+		max-width: 42rem;
+		margin: 0 auto;
 	}
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 457px) {
 	html {
-		font-size: 62.5%;
+		font-size: 100%;
 	}
 }
 
 body {
+	margin-top: 3rem;
 	text-align: center;
+}
+
+h1 {
+	font-size:3rem;
+	margin-bottom:0;
 }
 
 ul {
@@ -37,6 +45,18 @@ section article ul { /* hexagram */
 
 section article ul li { /* hexagram line*/
 	margin: 1rem 0;
+}
+
+section article p { /* hexagram name */
+	min-height: 1rem;
+}
+
+/* button */
+
+button {
+	touch-action: manipulation;
+	font-size: 2rem;
+	color: black;
 }
 
 /* line css drawings */
@@ -70,4 +90,12 @@ section article ul li { /* hexagram line*/
 
 .old {
 	background: orange;
+}
+
+.placeholder {
+	background: grey;
+}
+
+.yin.placeholder:after {
+	background: grey;
 }
