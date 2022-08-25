@@ -1,4 +1,4 @@
-@media screen and (min-width: 456px) {
+@media screen and (min-width: 445px) {
 	html {
 		font-size: 100%;
 		max-width: 42rem;
@@ -6,20 +6,24 @@
 	}
 }
 
-@media screen and (max-width: 457px) {
+@media screen and (max-width: 444px) {
 	html {
-		font-size: 100%;
+		font-size: 62.5%;
+		max-width: 42rem
 	}
+}
+.container {
+
 }
 
 body {
-	margin-top: 3rem;
+	margin-top: 4rem;
 	text-align: center;
 }
 
 h1 {
-	font-size:3rem;
-	margin-bottom:0;
+	font-size:4rem;
+	margin: 0;
 }
 
 ul {
@@ -27,28 +31,39 @@ ul {
 	padding: 0;
 }
 
+p {
+	font-size: 2rem;
+}
+
 /* section styles */
 
 section {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;	
+	justify-content: center;
+	min-height:20rem;
 }
 
 section article {
 	margin: 0 1rem;
+	display: flex;
+	flex-direction: column;
 }
 
 section article ul { /* hexagram */
 	width: 15rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	margin-top: auto;
 }
 
 section article ul li { /* hexagram line*/
-	margin: 1rem 0;
+	margin: .5rem 0;
 }
 
 section article p { /* hexagram name */
-	min-height: 1rem;
+	margin: 0;
 }
 
 /* button */
@@ -64,14 +79,14 @@ button {
 .yang {
 	width: 15rem;
 	height: 2rem;
-	background: #e7e42a;
+	background: black;
 }
 
 .yin {
 	width: 7rem;
 	height: 2rem;
 	border-right: 9rem;
-	background:  #e7e42a;
+	background:  black;
 }
 
 .yin:after {
@@ -81,21 +96,25 @@ button {
 	height: 2rem;
 	margin-left: 8rem;
 	padding-left: 7rem;
-	background:  #e7e42a;
+	background-color:  black;
 }
 
 .yin.old:after {
-	background: orange;
+	background-color: red;
 }
 
 .old {
-	background: orange;
+	background-color:red;
 }
 
 .placeholder {
-	background: grey;
+	background-color: grey;
 }
 
 .yin.placeholder:after {
-	background: grey;
+	background-color: grey;
+}
+
+.yinyang {
+	width: 60%;
 }
