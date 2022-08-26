@@ -1,28 +1,83 @@
-@media screen and (min-width: 445px) {
-	html {
-		font-size: 100%;
-		max-width: 42rem;
-		margin: 0 auto;
-	}
-}
-
-@media screen and (max-width: 444px) {
-	html {
-		font-size: 62.5%;
-		max-width: 42rem
-	}
-}
-.container {
-
-}
-
-body {
-	margin-top: 4rem;
+html {
+	font-size: 75%;
+	margin: 0 auto;
 	text-align: center;
 }
 
-h1 {
-	font-size:4rem;
+@media (min-width: 960px) {
+	html {
+		font-size: 87.5%;
+		text-align: left;
+	}
+}
+
+@media (max-width: 640px) {
+	html {
+		font-size: 62.5%;
+	}
+}
+
+body {
+	margin: 0;
+	width: 100%;
+}
+
+.hero {
+	padding: 5.6rem 2.4rem 4.8rem 2.4rem;
+}
+
+@media (min-width: 960px) {
+	.hero {
+		padding: 7.2rem 6.4rem 6.4rem 6.4rem;
+	}
+}
+
+.container {
+	max-width: 1152px;
+	min-width: 37rem;
+	display: flex;
+	margin: 0 auto;
+	flex-direction: column;
+}
+
+@media (min-width: 960px) {
+	.container {
+		flex-direction: row;
+		justify-content: center;
+	}
+}
+
+.main {
+	margin: 0;
+	order: 2;
+}
+
+@media (min-width: 960px) {
+	.main {
+		order: 1;
+		min-width: 31rem;
+	}
+}
+
+.image {
+	order: 1;
+	margin: auto;
+}
+
+@media (min-width: 960px) {
+	.image {
+		order: 2;
+		flex-grow: 1;
+		width:20rem;
+		text-align: center;
+	}
+}
+
+.yinyang {
+	width: 25.6rem;
+}
+
+h1, p {
 	margin: 0;
 }
 
@@ -31,21 +86,22 @@ ul {
 	padding: 0;
 }
 
-p {
-	font-size: 2rem;
-}
-
-/* section styles */
-
-section {
+section { /* hexagram section */
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
 	min-height:20rem;
+	justify-content: center;
+	margin: 0 -.5rem 0 -.5rem;
 }
 
-section article {
-	margin: 0 1rem;
+@media (min-width: 960px) {
+	section {
+		justify-content:flex-start;
+	}
+}
+
+section article { /* hexagram container */
+	margin: 0;
 	display: flex;
 	flex-direction: column;
 }
@@ -56,6 +112,7 @@ section article ul { /* hexagram */
 	flex-direction: column;
 	justify-content: flex-end;
 	margin-top: auto;
+	margin: auto .5rem 0 .5rem;
 }
 
 section article ul li { /* hexagram line*/
@@ -66,13 +123,25 @@ section article p { /* hexagram name */
 	margin: 0;
 }
 
-/* button */
+/* buttons */
+.actions {
+	display: flex;
+	padding-top: 2.4rem;
+	justify-content: center;
+}
+
+@media (min-width: 960px) {
+	.actions {
+		justify-content: left;
+	}
+}
 
 button {
 	touch-action: manipulation;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	color: black;
 }
+
 
 /* line css drawings */
 
@@ -113,8 +182,4 @@ button {
 
 .yin.placeholder:after {
 	background-color: grey;
-}
-
-.yinyang {
-	width: 60%;
 }

@@ -6,14 +6,22 @@
     <script type="text/javascript" src="main.js"></script>
   </head>
   <body>
-    <div class=container>
-      <img class='yinyang' src="yin-yang.svg" />
-      <h1>I Ching</h1>
-      <p>Click to consult the Oracle</p>
-      <section>
-        <article></article>
-      </section>
-      <button id="castBtn" onclick="cast(hex)">Cast Line</button>
-    </div>
+    <div class="hero">
+      <div class="container">
+        <div class="image">
+          <img class="yinyang" src="yin-yang.svg" />
+        </div> <!-- image -->
+        <div class="main">
+          <h1>I Ching</h1>
+          <p>Click to consult the Oracle</p>
+          <section>
+            <article></article>
+          </section>
+          <div class="actions">
+            <button id="castBtn" onclick="cast(hex)">Cast Line</button>
+          </div>
+        </div> <!-- main -->
+      </div> <!-- container -->
+    </div> <!-- hero -->
   </body>
 </html>
