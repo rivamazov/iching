@@ -23,7 +23,7 @@ body {
 }
 
 .hero {
-	padding: 5.6rem 2.4rem 4.8rem 2.4rem;
+	padding-top: 2.4rem;
 }
 
 @media (min-width: 960px) {
@@ -79,6 +79,14 @@ body {
 
 h1, p {
 	margin: 0;
+}
+
+h1 {
+	font-size: 4rem;
+}
+
+p {
+	font-size: 2rem;
 }
 
 ul {
@@ -138,7 +146,7 @@ section article p { /* hexagram name */
 
 button {
 	touch-action: manipulation;
-	font-size: 1.5rem;
+	font-size: 2rem;
 	color: black;
 }
 
