@@ -4,24 +4,32 @@ const PROBABILITY_ARR = [6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9]
 const HEX_LOOKUP_ARR = getLookupArr()
 const HEX_MAX = 6
 
-class Hexagram {
-  constructor(...lines) {
-    this.lines = lines
-    this.number
-  }
-  castLine() {
-    if (this.isFull()) return
+const hexagram = {
+  lines: [],
+  isFull: function() {
+    if (this.lines.length >= HEX_MAX) return true
+    else false
+  },
+  isChanging: function() {
+    if (this.lines.contains(6) || this.lines.contains(9)) return true
+    return false
+  },
+  castLine: function() {
     this.lines.push(PROBABILITY_ARR[Math.floor(Math.random()*PROBABILITY_ARR.length)])
-  }
-  isFull() {
-    if (this.lines.length >= HEX_MAX) {
-      return true
-    }
-    else return false
-  }
-  isChanging() {
-    if (this.lines.includes(6) || this.lines.includes(9)) return true
-    else return false
+  },
+  calculateBase: function() {
+    this.lines.map(x => {
+      if (x === 6) return 8
+      if (x === 9) return 7
+      return x
+    })
+  },
+  calculateChanging: function() {
+    return this.lines.map(x => {
+      if (x === 6) return 9
+      if (x === 9) return 6
+      return x
+    })
   }
 }
 
@@ -34,6 +42,9 @@ function hexArrToArticle(hexObjArr) {
     ul.prepend(lineLi)
   }
   article.appendChild(ul)
+  if (hexObjArr.length === HEX_MAX) {
+     
+  }
   return article
 }
 
@@ -47,25 +58,18 @@ function hexLineToCssClass(line) {
   }
 }
 
-function update(hexObj) {
+function update() {
   const section = document.querySelector('section')
   section.removeChild(document.querySelector('section article'))
-  const article = hexArrToArticle(hexObj.lines)
+  const article = hexArrToArticle(hex.lines)
   section.appendChild(article)
 
-  if (hexObj.isFull()) {
-    if (hexObj.isChanging()) {
-      section.appendChild(hexArrToArticle(getSecondary(hexObj)))
+  if (hex.isFull()) {
+    secondary.lines = hex.calculateChanging()
+    if (JSON.stringify(hex.lines) !== JSON.stringify(secondary.lines)) {
+      section.appendChild(hexArrToArticle(secondary.lines))
     }
   }
-}
-
-function getSecondary(hexObj) {
-  return hexObj.lines.map(x => {
-    if (x == 6) return x+3
-    else if (x == 9) return x-3
-    else return x
-  })
 }
 
 async function getLookupArr() {
@@ -76,4 +80,5 @@ async function getLookupArr() {
   return hexLookupArr
 }
 
-const hex = new Hexagram()
+const hex = hexagram
+const secondary = Object.assign({}, hexagram)
