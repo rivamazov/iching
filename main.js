@@ -1,11 +1,11 @@
 'use strict'
 
 const PROBABILITY_ARR = [6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9]
-const HEX_LOOKUP_ARR = getLookupArr()
 const HEX_MAX = 6
 
 const hexagram = {
   lines: [],
+  number: 0,
   isFull: function() {
     if (this.lines.length >= HEX_MAX) return true
     else false
@@ -30,20 +30,27 @@ const hexagram = {
       if (x === 9) return 6
       return x
     })
+  },
+  compareLines: function(hexObj) {
+    if (JSON.stringify(this.lines) === JSON.stringify(hexObj.lines)) return true
+    else return false
   }
 }
 
-function hexArrToArticle(hexObjArr) {
+function hexObjToArticle(hexObj) {
   const article = document.createElement('article')
   const ul = document.createElement('ul')
-  for (const line of hexObjArr) {
+  for (const line of hexObj.lines) {
     const lineLi = document.createElement('li')
     lineLi.setAttribute('class', `${hexLineToCssClass(line)}`)
     ul.prepend(lineLi)
   }
   article.appendChild(ul)
-  if (hexObjArr.length === HEX_MAX) {
-     
+  if (hexObj.isFull()) {
+    const p = document.createElement('p')
+    p.innerHTML = getNumber(hexObj)
+    console.log(p.innerHTML)
+    article.appendChild(p)
   }
   return article
 }
@@ -58,26 +65,34 @@ function hexLineToCssClass(line) {
   }
 }
 
+async function fetchHexagramsJSON() {
+  const response = await fetch('./hexArr.json')
+  const hexagrams = await response.json()
+  return hexagrams
+}
+
+function getNumber(hexObj) {
+  fetchHexagramsJSON().then(hexagrams => {
+    for (const hexagram of hexagrams) {
+      if (hexObj.compareLines(hexagram)) {
+        console.log(hexagram.number)
+      }
+    }
+  })
+}
+
 function update() {
   const section = document.querySelector('section')
   section.removeChild(document.querySelector('section article'))
-  const article = hexArrToArticle(hex.lines)
+  const article = hexObjToArticle(hex)
   section.appendChild(article)
 
   if (hex.isFull()) {
     secondary.lines = hex.calculateChanging()
-    if (JSON.stringify(hex.lines) !== JSON.stringify(secondary.lines)) {
-      section.appendChild(hexArrToArticle(secondary.lines))
+    if (!hex.compareLines(secondary)) {
+      section.appendChild(hexObjToArticle(secondary))
     }
   }
-}
-
-async function getLookupArr() {
-  const requestUrl = 'hexArr.json'
-  const request = new Request(requestUrl)
-  const response = await fetch(request);
-  const hexLookupArr = await response.json()
-  return hexLookupArr
 }
 
 const hex = hexagram
