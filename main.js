@@ -2,6 +2,8 @@
 
 const PROBABILITY_ARR = [6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9]
 const HEX_MAX = 6
+const HEX_ARR = fetch('hexArr.json')
+  .then(result => result.json())
 
 const hexagram = {
   lines: [],
@@ -66,16 +68,8 @@ function hexObjToArticle(hexObj) {
   return article
 }
 
-async function fetchHexagramArray() {
-  return fetch('hexArr.json')
-    .then(result => result.json())
-    .then(data => {
-        return data
-    })
-}
-
 async function getNumber(hexObj) {
-  let hexagrams = await fetchHexagramArray()
+  const hexagrams = await HEX_ARR
   for (const hexagram of hexagrams) {
     if (sameArray(hexObj.calculateBase(), hexagram.lines)) {
       return hexagram.number
