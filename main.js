@@ -2,13 +2,11 @@
 
 const PROBABILITY_ARR = [6, 7, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9]
 const HEX_MAX = 6
-const HEX_ARR = fetch('hexArr.json')
-  .then(result => result.json())
+const HEX_ARR = fetch('hexArr.json').then(result => result.json())
 
 const hexagram = {
   lines: [],
   number: 0,
-  article: null,
   isFull: function() {
     if (this.lines.length >= HEX_MAX) return true
     else false
@@ -22,7 +20,6 @@ const hexagram = {
     if (this.isFull()) {
       this.number = await getNumber(this)     
     }
-    this.article = hexObjToArticle(this)
     update()
   },
   calculateBase: function() {
@@ -69,8 +66,7 @@ function hexObjToArticle(hexObj) {
 }
 
 async function getNumber(hexObj) {
-  const hexagrams = await HEX_ARR
-  for (const hexagram of hexagrams) {
+  for (const hexagram of await HEX_ARR) {
     if (sameArray(hexObj.calculateBase(), hexagram.lines)) {
       return hexagram.number
     }
@@ -80,12 +76,11 @@ async function getNumber(hexObj) {
 async function update() {
   const section = document.querySelector('section')
   section.removeChild(document.querySelector('section article'))
-  section.appendChild(hex.article)
+  section.appendChild(hexObjToArticle(hex))
   if (hex.isFull() && hex.isChanging()) {
     secondary.lines = hex.calculateChanging()
     secondary.number = await getNumber(secondary)
-    secondary.article = hexObjToArticle(secondary)
-    section.appendChild(secondary.article)
+    section.appendChild(hexObjToArticle(secondary))
   }
 }
 
